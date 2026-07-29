@@ -100,10 +100,10 @@ start-server.bat
 
 ## Test Instructions
 
-- 1. Download and install NodeJS and FFmpeg on your computer and add the full path of them to the path environment variable.
-- 2. Download or Git Clone this project to a folder.
-- 3. Open two Windows Command consoles, one for running the http/websocket server (start-sever.bat) and one for running FFmpeg to stream your webcam
-- 4. Right click the Demo.html file and open it in a browsers.   
+1. Download and install NodeJS and FFmpeg on your computer and add the full path of them to the path environment variable.
+2. Download or Git Clone this project to a folder.
+3. Open two Windows Command consoles, one for running the http/websocket server (start-sever.bat) and one for running FFmpeg to stream your webcam
+4. Right click the Demo.html file and open it in a browsers.   
 
 ## Notes
 
