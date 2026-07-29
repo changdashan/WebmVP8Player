@@ -10,7 +10,7 @@
 
 **WebmVP8Player** is a JavaScript-based live-streaming Webm/VP8 video player. It is based on **vp8-webm-javascript-decoder** by Dominik Homberger and runs in all modern web browsers.
 
-The original `dixie.js` was designed to decode complete WebM files and does not intended for live video streaming. It also runs as a global object within the browser. To enable live streaming, I wrapped the decoder in a JavaScript class named `Dixie` and added two methods, `startLive()` and `pushData()`, allowing it to process streaming data incrementally.
+The original `dixie.js` was designed to decode complete WebM files and does not intended for live video streaming. It also runs as a global object within the browser. To enable live streaming, I wrapped the decoder in a JavaScript class named `Dixie` and added several methods, `startLiveFromCluster()`, `startLive()` and `pushData()`, to allow it to process streaming data incrementally.
 
 On top of that, I developed `WebmVP8Player`, which adds WebSocket support and internally instantiates a `Dixie` object. This design allows multiple `WebmVP8Player` instances to run independently on the same page, making it possible to display live streams from multiple cameras simultaneously.
 
