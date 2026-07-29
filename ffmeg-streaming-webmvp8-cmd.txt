@@ -1,0 +1,17 @@
+
+
+ffmpeg -f dshow -i video="[Your Webcam Name]" -f webm -r 30 -s 640x360  -c:v libvpx -b:v 800K -g 10 http://127.0.0.1:8081/password
+ffmpeg -f dshow -i video="[Your Webcam Name]" -f webm -r 20 -s 800x450  -c:v libvpx -b:v 1M   -g 10 http://127.0.0.1:8081/password
+ffmpeg -f dshow -i video="[Your Webcam Name]" -f webm -r 15 -s 1280x720 -c:v libvpx -b:v 1.5M -g 10 http://127.0.0.1:8081/password
+
+For example, my webcam name is "Integrated Webcam", I use the following command:
+ffmpeg -f dshow -i video="Integrated Webcam" -f webm -r 20 -s 800x450 -c:v libvpx -b:v 1M -g 10 http://127.0.0.1:8081/password
+
+To find the name of your local webcam, run the following command on your cmd console:
+ffmpeg -list_devices true -f dshow -i dummy
+
+In the output, identify the lines with (vidoe) an (audio). The double quoted names are the name of your video and audio device names:
+[in#0 @ 000001c2c226f1c0] "Integrated Webcam" (video)
+[in#0 @ 000001c2c226f1c0] "Microphone (Realtek(R) Audio)" (audio)
+
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Live Streaming with Webm/VP8</title>
+	<script type="text/javascript" src="js/dixie-dc.js"></script>
+	<script type="text/javascript" src="js/webmvp8player.js"></script>
+</head>
+
+<body>
+
+	<table>
+	<tr><td>
+	<div id='viewPort1'>
+		<canvas id="vpximage1" style="border:1px solid black"></canvas>
+		<div id="info1" style="font-size:18px"></div>
+	</div>
+	</td>
+	</tr>
+	</table>
+
+	<script type="text/javascript">
+		
+		var canvas1 = document.getElementById("vpximage1");
+		
+		var ws_url1 = "ws://127.0.0.1:8082/";
+	
+		var webmPlayer1 = new WebmPlayer(ws_url1, canvas1, showInfo1);		
+	
+		//callback1
+		function showInfo1(timecode, frames, render, fps){
+			var info1 = document.getElementById("info1");	
+			info1.innerHTML = "frames: <label style='display:inline-block;width:50px'>" + frames + "</label>render (ms): <label style='display:inline-block;width:40px;'>" + render + "</label>fps: <label style='display:inline-block;width:40px'>" + fps + "</label>"; 
+		}		
+		
+	</script>	
+	
+</body>
+</html>
