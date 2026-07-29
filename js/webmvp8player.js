@@ -145,7 +145,7 @@ var WebmPlayer = function(ws_url, canvas, showInfo){
 			if (! hdremitted ){
 				if (strs.length <= 2) return;
 				var uInt8Array = hexStringToBytes(clusterhdr + strs[1]);	//at least one cluster has to be appended to the webm header.				
-				var result = dixie.startLiveFromCluster(uInt8Array);		//initialize live stream starting any cluster. This eliminates the need to Webm container header at the stream server side.
+				var result = dixie.startLiveFromCluster(uInt8Array);		//initialize live stream starting from a cluster. This eliminates the need to Webm container header at the stream server side.
 				if (result == false) {
 					bytehexstr = "";
 					return;
