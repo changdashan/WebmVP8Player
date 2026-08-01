@@ -21,8 +21,8 @@
 // Author: John Koleszar (jkoleszar@google.com)
 //         Dominik Homberger (dominik.homberger@gmail.com)
 // 		   Dashan Chang (dashanchang@hotmail.com):
-//				1. added Dixie.startLive(webmhdr) and Dixie.pushData(clusterdata) two methods
-//					to make it handle live streaming with websocket.
+//				1. added Dixie.startLiveFromCluster(), Dixie.startLive(webmhdr) and Dixie.pushData(clusterdata) etc, several methods
+//				   to make it handle live streaming from websocket.
 //				2. wrapped it into a js class Dixie. This allows it for more than one instances on one page 
 //				3. fixed several bugs
 
@@ -8067,7 +8067,7 @@ var Dixie = function() {
 		if (id.val !== ID_CLUSTER)
 			return null;
 
-		var clusterEnd = file.data_off + size.val;
+		var clusterEnd = Math.min(file.data_off + size.val,clusterChunk.length);
 		while (file.data_off < clusterEnd) {
 			var childId = {val:uint64_t}, childSize = {val:uint64_t};
 			if (ne_read_id(io, childId, null) != 1 || ne_read_vint(io, childSize, null) != 1)
