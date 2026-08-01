@@ -115,12 +115,6 @@ The current implementation of **WebmVP8Player** achieves this goal. The stream s
 
 The **Dixie** object has been enhanced to parse key frame information starting from any cluster chunk and construct a minimal WebM header.
 
-One issue has been identified: the key frame parser works well when FFmpeg is passed the option `-g 1`. However, when the `-g` option is set to a higher value, it may need to iterate through multiple clusters before finding a key frame.
-
-My expectation was that a key frame would be present within each cluster, making it sufficient to parse a single cluster. However, the current implementation suggests this assumption may not always hold.
-
-The current implementation of the `parseClusterKeyframeInfo` method does not always behave this way and therefore requires further improvement.
-
 Contributions, bug reports, suggestions, and discussions are all welcome.
 
 
