@@ -107,14 +107,4 @@ start-server.bat
 
 ## Notes
 
-In the notes for **LiveStreamWebmPlayer**, I wrote:
-
-> "Ideally, the decoder would be able to reconstruct the required container information from a key frame or from the stream itself, eliminating the need for the cached WebM header on the stream server side."
-
-The current implementation of **WebmVP8Player** achieves this goal. The stream server now serves as a pure binary data tunnel between the remote camera and the browser-based player.
-
-The **Dixie** object has been enhanced to parse key frame information starting from any cluster chunk and construct a minimal WebM header.
-
-Contributions, bug reports, suggestions, and discussions are all welcome.
-
-
+My tests showed that the WebM/VP8 decoder in dixie.js is not efficient with a high resolution of video.
