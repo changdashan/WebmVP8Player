@@ -8056,6 +8056,16 @@ var Dixie = function() {
 	}
 
 	//-----------------------------------------------------------------------------
+	// create a minimal WebM header from a cluster chunk with known width and height and track number
+	this.startLiveFromCluster = function(clusterChunk, width, height) {
+		var track = 1;
+		var header = buildMinimalWebMHeader(track, width, height);
+		var hdr_cluster = new Uint8Array([...header, ...clusterChunk]);
+		this.startLive(hdr_cluster);
+		return true;
+	}
+
+	//-----------------------------------------------------------------------------
 	function parseClusterKeyframeInfo(clusterChunk) {
 		var file = {data:clusterChunk, data_off:0};
 		var io = {read:nestegg_read_cb, seek:nestegg_seek_cb, tell:nestegg_tell_cb, userdata:file};

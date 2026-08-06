@@ -109,7 +109,7 @@ var WebmPlayer = function(ws_url, canvas, showInfo){
 		}
 		
 		//-------------------------------------------------------------------------
-		function hexStringToBytes(str) {
+		function hexStringToBytes0(str) {
 			if (!str) {
 				return new Uint8Array();
 			}
@@ -119,6 +119,25 @@ var WebmPlayer = function(ws_url, canvas, showInfo){
 			}
 			return new Uint8Array(a);
 		}
+
+		function hexStringToBytes(str) {
+			if (!str) return new Uint8Array();
+
+			str = str.replace(/\s+/g, '').toLowerCase();
+			if (str.length % 2 !== 0) {
+				throw new Error('Hex string must have an even number of characters');
+			}
+
+			var bytes = new Uint8Array(str.length / 2);
+			for (var i = 0; i < str.length; i += 2) {
+				var value = parseInt(str.substr(i, 2), 16);
+				if (isNaN(value)) {
+					throw new Error('Invalid hex byte at position ' + i);
+				}
+				bytes[i / 2] = value;
+			}
+			return bytes;
+		}		
 		
 		//------------------------------------------------------------------------
 		function bytesToHexString(uInt8Array){
@@ -145,7 +164,7 @@ var WebmPlayer = function(ws_url, canvas, showInfo){
 			if (! hdremitted ){
 				if (strs.length <= 2) return;
 				var uInt8Array = hexStringToBytes(clusterhdr + strs[1]);	//at least one cluster has to be appended to the webm header.				
-				var result = dixie.startLiveFromCluster(uInt8Array);		//initialize live stream starting from a cluster. This eliminates the need to Webm container header at the stream server side.
+				var result = dixie.startLiveFromCluster(uInt8Array, canvas.width, canvas.height);		//initialize live stream starting from a cluster. This eliminates the need to Webm container header at the stream server side.
 				if (result == false) {
 					bytehexstr = "";
 					return;
@@ -162,6 +181,7 @@ var WebmPlayer = function(ws_url, canvas, showInfo){
 			for(var i=0; i<strs.length-1; i++){
 				uInt8Array = hexStringToBytes(clusterhdr + strs[i]);
 				dixie.pushData(uInt8Array);
+				//console.log(clusterhdr + strs[i]);
 			}
 			bytehexstr = strs[strs.length-1];	
 		}		
